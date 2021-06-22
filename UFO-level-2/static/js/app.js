@@ -1,4 +1,4 @@
-// Get references to the tbody element, input fields and button
+// Set Variables for the tbody element, input fields, and the buttons
 var $tbody = document.querySelector("tbody");
 var $dateInput = document.querySelector("#datetime");
 var $stateInput = document.querySelector("#state");
@@ -8,20 +8,21 @@ var $shapeInput = document.querySelector("#shape");
 var $searchBtn = document.querySelector("#search");
 var $resetBtn = document.querySelector("#reset");
 
-// Add an event listener to the searchButton, call handleSearchButtonClick when clicked
+// Add an event listener to the searchButton variable - initiate handleSearchButtonClick when clicked
 $searchBtn.addEventListener("click", handleSearchButtonClick);
 
-// Add an event listener to the resetButton, call handleResetButtonClick when clicked
+// Add an event listener to the resetButton variable, initiate handleResetButtonClick when clicked
 $resetBtn.addEventListener("click", handleResetButtonClick);
 
-// Create a copy of the data
+// Set the data to a variable
 var tableData = data;
 
-// Build table with non-filtered data
+// Setup the table with non-filtered data
 function renderTable() {
   $tbody.innerHTML = "";
+  // Iterate through the data table
   for (var i = 0; i < tableData.length; i++) {
-    // Get current address object and fields
+    // Log current address, object, and fields 
     var address = tableData[i];
     console.log(address)
     var fields = Object.keys(address);
@@ -36,7 +37,7 @@ function renderTable() {
   }
 }
 
-// Build search table for filtered data
+// Setup a search table for the filtered data
 function handleSearchButtonClick() {
   var filterDate = $dateInput.value;
   var filterState = $stateInput.value.trim().toLowerCase();
@@ -44,7 +45,7 @@ function handleSearchButtonClick() {
   var filterCountry = $countryInput.value.trim().toLowerCase();
   var filterShape = $shapeInput.value.trim().toLowerCase();
 
-  // Filter on date
+  // Filter by date
   if (filterDate != "") {
     tableData = data.filter(function (address) {
       var addressDate = address.datetime;
@@ -53,7 +54,7 @@ function handleSearchButtonClick() {
   }
   else { tableData };
 
-  // Filter on state
+  // Filter by state
   if (filterState != "") {
     tableData = tableData.filter(function (address) {
       var addressState = address.state;
@@ -62,7 +63,7 @@ function handleSearchButtonClick() {
   }
   else { tableData };
 
-  // Filter on city
+  // Filter by city
   if (filterCity != "") {
     tableData = tableData.filter(function (address) {
       var addressCity = address.city;
@@ -71,7 +72,7 @@ function handleSearchButtonClick() {
   }
   else { tableData };
 
-  // Filter on country
+  // Filter by country
   if (filterCountry != "") {
     tableData = tableData.filter(function (address) {
       var addressCountry = address.country;
@@ -80,7 +81,7 @@ function handleSearchButtonClick() {
   }
   else { tableData };
 
-  // Filter on shape
+  // Filter by shape
   if (filterShape != "") {
     tableData = tableData.filter(function (address) {
       var addressShape = address.shape;
@@ -92,10 +93,10 @@ function handleSearchButtonClick() {
   renderTable();
 }
 
-// Clear all the fields
+// Clear all the fields when the reset button is clicked
 function handleResetButtonClick(){
   renderTable();
 }
 
-// Render the table for the first time on page load
+// Render the table for the first time on page load or a refresh
 renderTable();
